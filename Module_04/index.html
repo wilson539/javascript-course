@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tip Calculator</title>
+  <script>
+    // Function to validate service quality
+    function validateQuality(quality) {
+      quality = quality.toLowerCase();
+      if (quality === "great" || quality === "ok" || quality === "poor") {
+        return quality;
+      } else {
+        alert("Invalid service quality entered. Please refresh and try again.");
+        return null;
+      }
+    }
+
+    // Function to validate service amount
+    function validateAmount(amount) {
+      if (isNaN(amount)) {
+        alert("The service amount must be a number. Please refresh and try again.");
+        return null;
+      }
+      if (amount < 5 || amount > 500) {
+        alert("The service amount must be between $5.00 and $500.00.");
+        return null;
+      }
+      return amount;
+    }
+
+    // Function to calculate the tip
+    function calculateTip(amount, quality) {
+      let tipPercent;
+      switch (quality) {
+        case "great": tipPercent = 0.20; break;
+        case "ok": tipPercent = 0.15; break;
+        case "poor": tipPercent = 0.10; break;
+      }
+      return amount * tipPercent;
+    }
+
+    // Main program execution
+    function runTipCalculator() {
+      let amountInput = prompt("Enter the dollar amount of the service:");
+      let amount = validateAmount(parseFloat(amountInput));
+      if (amount === null) return;
+
+      let qualityInput = prompt("Enter the service quality (great, ok, poor):");
+      let quality = validateQuality(qualityInput);
+      if (quality === null) return;
+
+      let tip = calculateTip(amount, quality);
+      alert(`For a service amount of $${amount.toFixed(2)}, the recommended tip based on ${quality} service is $${tip.toFixed(2)}.`);
+    }
+
+    // Run when the page loads
+    window.onload = runTipCalculator;
+  </script>
+</head>
+<body>
+  <h1>Tip Calculator</h1>
+  <p>The script will run automatically when the page loads.</p>
+</body>
+</html>
 
